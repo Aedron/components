@@ -1,0 +1,25 @@
+{
+  "name": "@vize/richtext-editor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "SKIP_PREFLIGHT_CHECK=true PORT=3000 ../../node_modules/.bin/react-app-rewired start",
+    "build": "rm -r ./build; SKIP_PREFLIGHT_CHECK=true ../../node_modules/.bin/react-app-rewired build",
+    "publish": "npm publish --access public"
+  },
+  "author": "",
+  "license": "ISC",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

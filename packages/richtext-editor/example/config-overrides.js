@@ -6,6 +6,7 @@ const {
   addWebpackResolve,
   addLessLoader,
   babelInclude,
+  babelExclude,
   adjustStyleLoaders,
 } = require('customize-cra');
 
@@ -40,24 +41,11 @@ module.exports = {
       test: /\.raw\.svg$/,
       use: [{ loader: 'raw-loader' }],
     }),
-    babelInclude([path.resolve(__dirname, './src'), path.resolve(__dirname, '../../node_modules/@vize/types')]),
+    babelExclude([path.resolve(__dirname, './src/lib')]),
     addLessLoader({
       strictMath: false,
       noIeCompat: true,
       javascriptEnabled: true,
     }),
-    // setWebpackPublicPath('/editor/'),
-    setOutputPublicPath('/editor/'),
   ),
 };
-
-function setOutputPublicPath(publicPath) {
-  return function(config) {
-    if (typeof config !== 'object') {
-      return config;
-    }
-
-    config.output.publicPath = publicPath;
-    return config;
-  };
-}

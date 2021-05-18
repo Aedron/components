@@ -46,6 +46,7 @@
     "react-app-rewired": "^2.1.6",
     "react-scripts": "^4.0.3",
     "rollup": "^2.48.0",
+    "rollup-plugin-scss": "^2.6.1",
     "rollup-plugin-typescript2": "^0.30.0",
     "sass": "^1.32.12",
     "sass-loader": "^8.0.2",

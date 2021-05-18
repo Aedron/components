@@ -1,11 +1,7 @@
-import 'tippy.js/animations/scale.css';
-import 'tippy.js/dist/tippy.css';
-import React from 'react';
-import { TippyProps } from '@tippyjs/react';
+import React, { useCallback } from 'react';
 import {
   addColumn,
   addRow,
-  BalloonToolbar,
   deleteColumn,
   deleteRow,
   deleteTable,
@@ -69,20 +65,23 @@ import {
   MdLooksOne,
   MdLooksTwo,
   MdLink,
+  MdSearch,
 } from 'react-icons/md';
 import { BiCodeBlock } from 'react-icons/bi';
 import { ImSubscript, ImSuperscript } from 'react-icons/im';
 
 export const ToolbarButtonsBasicElements = () => (
   <>
+    <ToolbarElement type={useSlatePluginType(ELEMENT_BLOCKQUOTE)} icon={<MdFormatQuote />} />
+    <ToolbarLink icon={<MdLink />} />
+    <ToolbarCodeBlock type={useSlatePluginType(ELEMENT_CODE_BLOCK)} icon={<BiCodeBlock />} />
+    <ToolbarImage icon={<MdImage />} />
     <ToolbarElement type={useSlatePluginType(ELEMENT_H1)} icon={<MdLooksOne />} />
     <ToolbarElement type={useSlatePluginType(ELEMENT_H2)} icon={<MdLooksTwo />} />
     <ToolbarElement type={useSlatePluginType(ELEMENT_H3)} icon={<MdLooks3 />} />
     <ToolbarElement type={useSlatePluginType(ELEMENT_H4)} icon={<MdLooks4 />} />
     <ToolbarElement type={useSlatePluginType(ELEMENT_H5)} icon={<MdLooks5 />} />
     <ToolbarElement type={useSlatePluginType(ELEMENT_H6)} icon={<MdLooks6 />} />
-    <ToolbarElement type={useSlatePluginType(ELEMENT_BLOCKQUOTE)} icon={<MdFormatQuote />} />
-    <ToolbarCodeBlock type={useSlatePluginType(ELEMENT_CODE_BLOCK)} icon={<BiCodeBlock />} />
   </>
 );
 
@@ -125,61 +124,47 @@ export const ToolbarButtonsBasicMarks = () => {
   );
 };
 
-export const ToolbarButtonsTable = () => (
-  <>
-    <ToolbarMark type={useSlatePluginType(MARK_BOLD)} icon={<MdFormatBold />} />
-    <ToolbarTable icon={<MdBorderAll />} transform={insertTable} />
-    <ToolbarTable icon={<MdBorderClear />} transform={deleteTable} />
-    <ToolbarTable icon={<MdBorderBottom />} transform={addRow} />
-    <ToolbarTable icon={<MdBorderTop />} transform={deleteRow} />
-    <ToolbarTable icon={<MdBorderLeft />} transform={addColumn} />
-    <ToolbarTable icon={<MdBorderRight />} transform={deleteColumn} />
-  </>
-);
+interface SearchProps {
+  searchVisible: boolean;
+  setSearchVisible: (v: boolean | ((v: boolean) => boolean)) => void;
+}
 
-export const BallonToolbarMarks = () => {
-  const arrow = false;
-  const theme = 'dark';
-  const direction = 'top';
-  const hiddenDelay = 0;
-  const tooltip: TippyProps = {
-    arrow: true,
-    delay: 0,
-    duration: [200, 0],
-    hideOnClick: false,
-    offset: [0, 17],
-    placement: 'top',
-  };
-
+export function ToolbarButtonSearch({ searchVisible, setSearchVisible }: SearchProps) {
+  const onClick = useCallback(() => setSearchVisible(i => !i), []);
   return (
-    <BalloonToolbar direction={direction} hiddenDelay={hiddenDelay} theme={theme} arrow={arrow}>
-      <ToolbarMark
-        type={useSlatePluginType(MARK_BOLD)}
-        icon={<MdFormatBold />}
-        tooltip={{ content: 'Bold (⌘B)', ...tooltip }}
-      />
-      <ToolbarMark
-        type={useSlatePluginType(MARK_ITALIC)}
-        icon={<MdFormatItalic />}
-        tooltip={{ content: 'Italic (⌘I)', ...tooltip }}
-      />
-      <ToolbarMark
-        type={useSlatePluginType(MARK_UNDERLINE)}
-        icon={<MdFormatUnderlined />}
-        tooltip={{ content: 'Underline (⌘U)', ...tooltip }}
-      />
-    </BalloonToolbar>
+    <span className={`slate-ToolbarButton${searchVisible ? ' slate-ToolbarButton-active' : ''}`} onClick={onClick}>
+      <MdSearch />
+    </span>
   );
-};
+}
 
-export const ToolbarButtons = () => (
-  <>
-    <ToolbarButtonsBasicElements />
-    <ToolbarButtonsList />
-    <ToolbarButtonsBasicMarks />
-    <ToolbarButtonsAlign />
-    <ToolbarLink icon={<MdLink />} />
-    <ToolbarImage icon={<MdImage />} />
-    <ToolbarButtonsTable />
-  </>
-);
+export function ToolbarButtonsTable() {
+  return (
+    <>
+      <ToolbarTable icon={<MdBorderAll />} transform={insertTable} />
+      <ToolbarTable icon={<MdBorderClear />} transform={deleteTable} />
+      <ToolbarTable icon={<MdBorderBottom />} transform={addRow} />
+      <ToolbarTable icon={<MdBorderTop />} transform={deleteRow} />
+      <ToolbarTable icon={<MdBorderLeft />} transform={addColumn} />
+      <ToolbarTable icon={<MdBorderRight />} transform={deleteColumn} />
+    </>
+  );
+}
+
+type Props = SearchProps;
+
+export function ToolbarButtons({ searchVisible, setSearchVisible }: Props) {
+  return (
+    <>
+      <ToolbarButtonsBasicMarks />
+      <span className="vize-richtext-toolbar-split-line" />
+      <ToolbarButtonsList />
+      <ToolbarButtonsBasicElements />
+      <span className="vize-richtext-toolbar-split-line" />
+      <ToolbarButtonsAlign />
+      <span className="vize-richtext-toolbar-split-line" />
+      <ToolbarButtonSearch searchVisible={searchVisible} setSearchVisible={setSearchVisible} />
+      {/*<ToolbarButtonsTable />*/}
+    </>
+  );
+}

@@ -1,6 +1,5 @@
-import './index.scss';
 import * as React from 'react';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import {
   ELEMENT_H1,
   ELEMENT_IMAGE,
@@ -28,7 +27,6 @@ import {
   createListPlugin,
   createMediaEmbedPlugin,
   createNodeIdPlugin,
-  createNormalizeTypesPlugin,
   createParagraphPlugin,
   createReactPlugin,
   createResetNodePlugin,
@@ -57,8 +55,10 @@ import {
   optionsSoftBreakPlugin,
   withStyledPlaceHolders,
 } from '../../libs';
-import { BallonToolbarMarks, ToolbarButtons } from '../ToolBar';
+import { ToolbarButtons } from '../ToolBar';
 import { WithFrame } from '../WithFrame';
+import frameStyles from './index.iframe.scss';
+import contentStyle from '../../styles/content.iframe.scss';
 
 type TEditor = SPEditor & ReactEditor & HistoryEditor;
 
@@ -71,7 +71,8 @@ interface Props {
   wrapperClassName?: string;
 }
 
-export const RichTextEditor = ({ wrapperClassName, id }: Props) => {
+export function RichTextEditor({ wrapperClassName, id }: Props) {
+  const [searchVisible, setSearchVisible] = useState(false);
   const { setSearch, plugin: searchHighlightPlugin } = useFindReplacePlugin();
 
   const plugins: SlatePlugin<TEditor>[] = useMemo(() => {
@@ -103,9 +104,6 @@ export const RichTextEditor = ({ wrapperClassName, id }: Props) => {
       createResetNodePlugin(optionsResetBlockTypePlugin),
       createSoftBreakPlugin(optionsSoftBreakPlugin),
       createExitBreakPlugin(optionsExitBreakPlugin),
-      // createNormalizeTypesPlugin({
-      //   rules: [{ path: [0, 0], strictType: options[ELEMENT_H1].type }],
-      // }),
       createTrailingBlockPlugin({
         type: options[ELEMENT_PARAGRAPH].type,
         level: 1,
@@ -120,23 +118,25 @@ export const RichTextEditor = ({ wrapperClassName, id }: Props) => {
   }, [searchHighlightPlugin]);
 
   return (
-    // <WithFrame className={wrapperClassName}>
-    <SlatePlugins
-      id={id || 'vize-component-richtext-editor'}
-      plugins={plugins}
-      components={components}
-      options={options}
-      editableProps={editableProps}
-      initialValue={initialValueEmpty}
-    >
-      <ToolbarSearchHighlight icon={MdSearch} setSearch={setSearch} />
+    <WithFrame className={wrapperClassName}>
+      <style type="text/css">{frameStyles}</style>
+      <style type="text/css">{contentStyle}</style>
+      <SlatePlugins
+        id={id || 'vize-component-richtext-editor'}
+        plugins={plugins}
+        components={components}
+        options={options}
+        editableProps={editableProps}
+        initialValue={initialValueEmpty}
+      >
+        <HeadingToolbar>
+          <ToolbarButtons searchVisible={searchVisible} setSearchVisible={setSearchVisible} />
+        </HeadingToolbar>
 
-      <HeadingToolbar>
-        <ToolbarButtons />
-      </HeadingToolbar>
+        {searchVisible && <ToolbarSearchHighlight icon={MdSearch} setSearch={setSearch} />}
 
-      <BallonToolbarMarks />
-    </SlatePlugins>
-    // </WithFrame>
+        <hr className="vize-component-richtext-editor-toolbar-split-line" />
+      </SlatePlugins>
+    </WithFrame>
   );
-};
+}

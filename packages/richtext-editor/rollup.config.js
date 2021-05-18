@@ -1,5 +1,6 @@
 import typescript from 'rollup-plugin-typescript2';
 import projPkg from '../../package.json';
+import scss from 'rollup-plugin-scss';
 import pkg from './package.json';
 
 export default [
@@ -9,6 +10,9 @@ export default [
     plugins: [
       typescript({
         typescript: require('typescript'),
+      }),
+      scss({
+        output: false,
       }),
     ],
     output: [

@@ -18,7 +18,8 @@
     "baseUrl": "src",
     "noImplicitThis": false,
     "downlevelIteration": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "declaration": true
   },
   "typeAcquisition": {},
   "include": ["src", "stories"]

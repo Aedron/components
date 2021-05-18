@@ -4,130 +4,65 @@ import {
   ELEMENT_H1,
   ELEMENT_IMAGE,
   ELEMENT_PARAGRAPH,
-  createSlatePluginsComponents,
-  createSlatePluginsOptions,
   HeadingToolbar,
   SlatePlugin,
   SlatePlugins,
   ToolbarSearchHighlight,
-  createAlignPlugin,
-  createAutoformatPlugin,
-  createBlockquotePlugin,
-  createBoldPlugin,
-  createCodeBlockPlugin,
-  createCodePlugin,
-  createExitBreakPlugin,
-  createHeadingPlugin,
-  createHighlightPlugin,
-  createHistoryPlugin,
-  createKbdPlugin,
-  createImagePlugin,
-  createItalicPlugin,
-  createLinkPlugin,
-  createListPlugin,
-  createMediaEmbedPlugin,
-  createNodeIdPlugin,
-  createParagraphPlugin,
-  createReactPlugin,
-  createResetNodePlugin,
-  createSelectOnBackspacePlugin,
-  createSoftBreakPlugin,
-  createStrikethroughPlugin,
-  createSubscriptPlugin,
-  createSuperscriptPlugin,
-  createTablePlugin,
-  createTodoListPlugin,
-  createTrailingBlockPlugin,
-  createUnderlinePlugin,
   createDeserializeHTMLPlugin,
+  deserializeHTMLToDocumentFragment,
   useFindReplacePlugin,
   SPEditor,
+  TDescendant,
 } from '@udecode/slate-plugins';
-import { HistoryEditor } from 'slate-history';
-import { ReactEditor } from 'slate-react';
 import { MdSearch } from 'react-icons/md';
-import {
-  optionsAutoformat,
-  initialValueEmpty,
-  editableProps,
-  optionsExitBreakPlugin,
-  optionsResetBlockTypePlugin,
-  optionsSoftBreakPlugin,
-  withStyledPlaceHolders,
-} from '../../libs';
+import { initialValueEmpty, editableProps } from '../../libs';
 import { ToolbarButtons } from '../ToolBar';
 import { WithFrame } from '../WithFrame';
-import frameStyles from './index.iframe.scss';
-import contentStyle from '../../styles/content.iframe.scss';
-
-type TEditor = SPEditor & ReactEditor & HistoryEditor;
-
-const components = withStyledPlaceHolders(createSlatePluginsComponents({}));
-
-const options = createSlatePluginsOptions({});
+import { TEditor, defaultPlugins, components, editor, options } from './options';
+import { Styles } from './Styles';
 
 interface Props {
   id?: string;
   wrapperClassName?: string;
+  iframeStyles?: { [key: string]: string };
+  initRawValue?: TDescendant[];
+  initValue?: string;
 }
 
-export function RichTextEditor({ wrapperClassName, id }: Props) {
+export function Editor({ wrapperClassName, id, iframeStyles, initValue, initRawValue }: Props) {
   const [searchVisible, setSearchVisible] = useState(false);
   const { setSearch, plugin: searchHighlightPlugin } = useFindReplacePlugin();
 
   const plugins: SlatePlugin<TEditor>[] = useMemo(() => {
-    const p = [
-      createReactPlugin(),
-      createHistoryPlugin(),
-      createParagraphPlugin(),
-      createBlockquotePlugin(),
-      createTodoListPlugin(),
-      createHeadingPlugin(),
-      createImagePlugin(),
-      createLinkPlugin(),
-      createListPlugin(),
-      createTablePlugin(),
-      createMediaEmbedPlugin(),
-      createCodeBlockPlugin(),
-      createAlignPlugin(),
-      createBoldPlugin(),
-      createCodePlugin(),
-      createItalicPlugin(),
-      createHighlightPlugin(),
-      createUnderlinePlugin(),
-      createStrikethroughPlugin(),
-      createSubscriptPlugin(),
-      createSuperscriptPlugin(),
-      createKbdPlugin(),
-      createNodeIdPlugin(),
-      createAutoformatPlugin(optionsAutoformat),
-      createResetNodePlugin(optionsResetBlockTypePlugin),
-      createSoftBreakPlugin(optionsSoftBreakPlugin),
-      createExitBreakPlugin(optionsExitBreakPlugin),
-      createTrailingBlockPlugin({
-        type: options[ELEMENT_PARAGRAPH].type,
-        level: 1,
-      }),
-      createSelectOnBackspacePlugin({ allow: options[ELEMENT_IMAGE].type }),
-      searchHighlightPlugin,
-    ];
-
+    const p = [...defaultPlugins, searchHighlightPlugin];
     p.push(createDeserializeHTMLPlugin({ plugins: p }) as any);
-
     return p;
   }, [searchHighlightPlugin]);
 
+  const initialValue = useMemo(() => {
+    if (initRawValue) {
+      return initRawValue;
+    }
+    if (initValue) {
+      return deserializeHTMLToDocumentFragment(editor, {
+        plugins,
+        element: initValue,
+      });
+    }
+    return initialValueEmpty;
+  }, [initValue, initRawValue]);
+
   return (
     <WithFrame className={wrapperClassName}>
-      <style type="text/css">{frameStyles}</style>
-      <style type="text/css">{contentStyle}</style>
-      <SlatePlugins
+      <Styles iframeStyles={iframeStyles} />
+      <SlatePlugins<TEditor>
         id={id || 'vize-component-richtext-editor'}
         plugins={plugins}
         components={components}
         options={options}
+        editor={editor}
         editableProps={editableProps}
-        initialValue={initialValueEmpty}
+        initialValue={initialValue}
       >
         <HeadingToolbar>
           <ToolbarButtons searchVisible={searchVisible} setSearchVisible={setSearchVisible} />
@@ -140,3 +75,7 @@ export function RichTextEditor({ wrapperClassName, id }: Props) {
     </WithFrame>
   );
 }
+
+export { editor } from './options';
+export { slatePluginsStore as store } from '@udecode/slate-plugins';
+export * from './utils';

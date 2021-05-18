@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { memo, useCallback } from 'react';
 import {
   addColumn,
   addRow,
@@ -153,7 +153,7 @@ export function ToolbarButtonsTable() {
 
 type Props = SearchProps;
 
-export function ToolbarButtons({ searchVisible, setSearchVisible }: Props) {
+function IToolbarButtons({ searchVisible, setSearchVisible }: Props) {
   return (
     <>
       <ToolbarButtonsBasicMarks />
@@ -168,3 +168,5 @@ export function ToolbarButtons({ searchVisible, setSearchVisible }: Props) {
     </>
   );
 }
+
+export const ToolbarButtons = memo(IToolbarButtons);

@@ -1,7 +1,9 @@
 import typescript from 'rollup-plugin-typescript2';
-import projPkg from '../../package.json';
 import scss from 'rollup-plugin-scss';
+import projPkg from '../../package.json';
 import pkg from './package.json';
+
+const isProd = process.env.NODE_ENV === 'prod';
 
 export default [
   {
@@ -15,14 +17,17 @@ export default [
         output: false,
       }),
     ],
-    output: [
-      // { file: `${pkg.main}/index.js`, format: 'cjs' },
-      // { file: `${pkg.module}/index.js`, format: 'esm' },
-      {
-        file: 'example/src/lib/index.js',
-        format: 'es',
-        banner: '/* eslint-disable */',
-      },
-    ],
+    output: isProd
+      ? [
+          { file: `${pkg.main}/index.js`, format: 'cjs' },
+          { file: `${pkg.module}/index.js`, format: 'esm' },
+        ]
+      : [
+          {
+            file: 'example/src/lib/index.js',
+            format: 'es',
+            banner: '/* eslint-disable */',
+          },
+        ],
   },
 ];

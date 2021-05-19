@@ -4,7 +4,7 @@ A richtext editor React component using in project [vize](https://github.com/viz
 
 ## Preview
 
-![](https://gw.alicdn.com/imgextra/i2/O1CN01z4BHTN1jMcRSovP5l_!!6000000004534-0-tps-1134-952.jpg)
+![](https://gw.alicdn.com/imgextra/i4/O1CN01Fg1lfa1gUulfB5DEc_!!6000000004146-0-tps-1630-1354.jpg)
 
 ## Install
 

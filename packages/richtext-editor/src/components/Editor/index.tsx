@@ -59,7 +59,7 @@ export function Editor({ wrapperClassName, id, iframeStyles, initValue, initRawV
 
   return (
     <>
-      <div ref={entry} />
+      <div className="vize-component-richtext-editor-entry" ref={entry} />
       <WithFrame className={wrapperClassName}>
         <Styles iframeStyles={iframeStyles} />
         <SlatePlugins<TEditor>

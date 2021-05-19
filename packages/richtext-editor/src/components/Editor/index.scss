@@ -1,3 +1,7 @@
+.vize-component-richtext-editor-entry {
+  padding: 0 12px;
+}
+
 .vize-component-richtext-toolbar-split-line {
   width: 1px;
   height: 18px;
@@ -15,8 +19,8 @@
 }
 
 .slate-HeadingToolbar > div {
-  width: calc(100% - 24px);
-  margin: 2px 12px 12px 12px !important;
+  width: 100%;
+  margin: 2px 0 12px 0 !important;
   padding-bottom: 0 !important;
 
   input {

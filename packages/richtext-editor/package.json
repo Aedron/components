@@ -1,7 +1,7 @@
 {
   "name": "@vize/richtext-editor",
-  "version": "0.1.1",
-  "description": "",
+  "version": "0.1.2",
+  "description": "A richtext editor React component using in project vize.",
   "main": "dist/cjs",
   "module": "dist/esm",
   "scripts": {

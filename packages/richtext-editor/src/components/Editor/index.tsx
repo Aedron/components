@@ -72,10 +72,11 @@ export function Editor({ wrapperClassName, id, iframeStyles, initValue, initRawV
 
         <hr className="vize-component-richtext-editor-toolbar-split-line" />
       </SlatePlugins>
+      <hr className="vize-component-richtext-editor-toolbar-split-line" />
     </WithFrame>
   );
 }
 
-export { editor } from './options';
 export { slatePluginsStore as store } from '@udecode/slate-plugins';
-export * from './utils';
+export { editor } from './options';
+export { getRawValue, getHTML } from './utils';

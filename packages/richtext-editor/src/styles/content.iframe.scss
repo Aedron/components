@@ -42,3 +42,11 @@ pre {
   tab-size: 2;
   line-height: normal;
 }
+
+img {
+  display: block;
+  max-width: 100%;
+  max-height: 20em;
+  padding: 10px 0;
+  box-shadow: rgb(180, 213, 255);
+}

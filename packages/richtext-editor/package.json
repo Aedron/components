@@ -26,7 +26,8 @@
     "i18next": "^19.9.1",
     "i18next-browser-languagedetector": "^6.0.1",
     "i18next-chained-backend": "^2.0.1",
-    "i18next-localstorage-backend": "^3.1.2"
+    "i18next-localstorage-backend": "^3.1.2",
+    "react-tooltip": "^4.2.19"
   },
   "files": [
     "dist"

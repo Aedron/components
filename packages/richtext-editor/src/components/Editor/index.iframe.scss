@@ -3,46 +3,6 @@
   border: 1px solid grey;
 }
 
-.vize-richtext-toolbar-split-line {
-  width: 1px;
-  height: 18px;
-  display: inline-block;
-  background-color: #e4e4e4;
-  margin-right: 8px;
-  margin-left: 2px;
-  margin-top: 1px;
-}
-
-.slate-HeadingToolbar > div {
-  padding-bottom: 0 !important;
-  margin: 6px 0 12px 0 !important;
-
-  input:focus,
-  input:focus-visible {
-    outline-color: #fb9f34 !important;
-  }
-}
-
-.slate-ToolbarButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  margin-right: 6px;
-  margin-bottom: 6px;
-  border-radius: 4px;
-  width: 24px;
-  height: 24px;
-  text-align: center;
-  transition: all ease 300ms;
-
-  &.slate-ToolbarButton-active {
-    background-color: #fb9f34;
-    color: white;
-  }
-
-  svg {
-    width: 20px;
-    height: 20px;
-  }
+.slate-search_highlight {
+  background-color: rgb(255, 245, 157);
 }

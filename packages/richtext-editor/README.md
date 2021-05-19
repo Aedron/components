@@ -9,7 +9,7 @@ A richtext editor React component using in project [vize](https://github.com/viz
 ## Install
 
 ```bash
-npm install @vize/richtext-editor
+npm install @vize/richtext-editor @udecode/slate-plugins slate slate-history slate-hyperscript slate-react
 ```
 
 ## Usage

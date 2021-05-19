@@ -1,6 +1,6 @@
 {
   "name": "@vize/richtext-editor",
-  "version": "0.1.2",
+  "version": "0.1.5",
   "description": "A richtext editor React component using in project vize.",
   "main": "dist/cjs",
   "module": "dist/esm",
@@ -11,26 +11,27 @@
     "build-watch": "../../node_modules/.bin/rollup -c -w",
     "start-example": "cd example && npm start"
   },
-  "peerDependencies": {
-    "@udecode/slate-plugins": "^1.0.0-alpha.25",
-    "@udecode/slate-plugins-test-utils": "1.0.0-alpha.18",
-    "slate": "0.60.11",
-    "slate-history": "0.60.11",
-    "slate-hyperscript": "0.60.11",
-    "slate-react": "0.60.11",
-    "antd": "^4.15.5",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+  "dependencies": {
     "react-icons": "^4.2.0",
     "react-i18next": "^11.8.8",
     "i18next": "^19.9.1",
     "i18next-browser-languagedetector": "^6.0.1",
     "i18next-chained-backend": "^2.0.1",
-    "i18next-localstorage-backend": "^3.1.2",
-    "react-tooltip": "^4.2.19"
+    "i18next-localstorage-backend": "^3.1.2"
+  },
+  "peerDependencies": {
+    "@udecode/slate-plugins": "^1.0.0-alpha.25",
+    "slate": "0.60.11",
+    "slate-history": "0.60.11",
+    "slate-hyperscript": "0.60.11",
+    "slate-react": "0.60.11",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "antd": "^4.15.6"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "author": "",
   "license": "ISC",

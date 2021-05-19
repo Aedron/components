@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "start": "SKIP_PREFLIGHT_CHECK=true PORT=4000 ../../../node_modules/.bin/react-app-rewired start",
+    "build": "rm -r ./build; SKIP_PREFLIGHT_CHECK=true ../../../node_modules/.bin/react-app-rewired build"
+  }
+}

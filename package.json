@@ -1,0 +1,74 @@
+{
+  "scripts": {},
+  "dependencies": {
+    "@udecode/slate-plugins": "^1.0.0-alpha.25",
+    "@udecode/slate-plugins-test-utils": "1.0.0-alpha.18",
+    "antd": "^4.15.5",
+    "i18next": "^19.9.1",
+    "i18next-browser-languagedetector": "^6.0.1",
+    "i18next-chained-backend": "^2.0.1",
+    "i18next-localstorage-backend": "^3.1.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-i18next": "^11.8.8",
+    "react-icons": "^4.2.0",
+    "react-tooltip": "^4.2.19",
+    "slate": "0.60.11",
+    "slate-history": "0.60.11",
+    "slate-hyperscript": "0.60.11",
+    "slate-react": "0.60.11"
+  },
+  "peerDependencies": {},
+  "devDependencies": {
+    "@commitlint/cli": "^9.1.1",
+    "@commitlint/config-conventional": "^12.1.4",
+    "@types/react": "^16.9.29",
+    "@types/react-dom": "^16.9.5",
+    "@typescript-eslint/eslint-plugin": "^3.0.2",
+    "@typescript-eslint/parser": "^3.0.2",
+    "concurrently": "^6.1.0",
+    "css-loader": "^5.2.4",
+    "css-to-string-loader": "^0.1.3",
+    "customize-cra": "^0.9.1",
+    "enforce-branch-name": "^1.0.1",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-react-app": "^5.2.1",
+    "eslint-plugin-flowtype": "^5.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.21.4",
+    "eslint-plugin-react-hooks": "^4.1.2",
+    "husky": "^4.2.5",
+    "lerna": "^3.16.4",
+    "less": "4.1.0",
+    "less-loader": "5.0.0",
+    "lint-staged": "^10.2.11",
+    "prettier": "^1.19.1",
+    "raw-loader": "^4.0.1",
+    "react-app-rewired": "^2.1.6",
+    "react-scripts": "^4.0.3",
+    "rollup": "^2.48.0",
+    "rollup-plugin-scss": "^2.6.1",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "sass": "^1.32.12",
+    "sass-loader": "^8.0.2",
+    "tslib": "^2.2.0",
+    "typescript": "^4.2.4",
+    "webpack": "^4.46.0"
+  },
+  "lint-staged": {
+    "packages/*/src/**/*.{js,jsx,ts,tsx,json,d.ts}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "./node_modules/.bin/lint-staged",
+      "pre-push": "./node_modules/.bin/enforce-branch-name '(doc|bugfix|feature)/.+' --ignore 'staging'",
+      "commit-msg": "./node_modules/.bin/commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import 'antd/lib/tooltip/style/index.css';
 import * as React from 'react';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, forwardRef } from 'react';
 import { createPortal } from 'react-dom';
 import {
   HeadingToolbar,
@@ -28,7 +28,7 @@ interface Props {
   initValue?: string;
 }
 
-export function Editor({ wrapperClassName, id, iframeStyles, initValue, initRawValue }: Props) {
+function IEditor({ wrapperClassName, id, iframeStyles, initValue, initRawValue }: Props) {
   const entry = useRef<HTMLDivElement>(null);
   const [toolbarVisible, setToolbarVisible] = useState(false);
   const [searchVisible, setSearchVisible] = useState(true);
@@ -90,6 +90,8 @@ export function Editor({ wrapperClassName, id, iframeStyles, initValue, initRawV
     </>
   );
 }
+
+export const Editor = forwardRef(IEditor);
 
 export { slatePluginsStore as store } from '@udecode/slate-plugins';
 export { editor } from './options';

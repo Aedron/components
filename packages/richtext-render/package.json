@@ -1,0 +1,39 @@
+{
+  "name": "@vize/richtext-render",
+  "version": "0.1.0",
+  "description": "A richtext render React component using in project vize.",
+  "main": "dist/cjs",
+  "module": "dist/esm",
+  "scripts": {
+    "dev": "../../node_modules/.bin/concurrently --kill-others \"npm run build-watch\" \"npm run start-example\"",
+    "build": "NODE_ENV=prod ../../node_modules/.bin/rollup -c",
+    "publish": "npm publish --access public",
+    "build-watch": "../../node_modules/.bin/rollup -c -w",
+    "start-example": "cd example && npm start"
+  },
+  "dependencies": {
+    "@webcomponents/custom-elements": "^1.4.3"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "author": "",
+  "license": "ISC",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

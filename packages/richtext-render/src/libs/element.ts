@@ -7,8 +7,6 @@ export default class RichText extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
-
-    this.attributeChangedCallback = this.attributeChangedCallback.bind(this);
   }
 
   contentWrap?: HTMLDivElement;
@@ -53,4 +51,6 @@ export default class RichText extends HTMLElement {
 
 if (!window.customElements.get('vize-rich-text')) {
   window.customElements.define('vize-rich-text', RichText);
+} else {
+  console.warn('[vize-richtext-render] Custom element "vize-rich-text" is already exists.');
 }

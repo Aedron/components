@@ -1,6 +1,6 @@
 import 'antd/lib/tooltip/style/index.css';
 import * as React from 'react';
-import { useEffect, useMemo, useRef, useState, forwardRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import {
   HeadingToolbar,
@@ -28,10 +28,10 @@ interface Props {
   initValue?: string;
 }
 
-function IEditor({ wrapperClassName, id, iframeStyles, initValue, initRawValue }: Props) {
+export function Editor({ wrapperClassName, id, iframeStyles, initValue, initRawValue }: Props) {
   const entry = useRef<HTMLDivElement>(null);
   const [toolbarVisible, setToolbarVisible] = useState(false);
-  const [searchVisible, setSearchVisible] = useState(true);
+  const [searchVisible, setSearchVisible] = useState(false);
   const { setSearch, plugin: searchHighlightPlugin } = useFindReplacePlugin();
 
   const plugins: SlatePlugin<TEditor>[] = useMemo(() => {
@@ -70,6 +70,7 @@ function IEditor({ wrapperClassName, id, iframeStyles, initValue, initRawValue }
           editor={editor}
           editableProps={editableProps}
           initialValue={initialValue}
+          // renderEditable={(content) => React.createPortal(content, entry)}
         >
           {toolbarVisible &&
             createPortal(
@@ -90,8 +91,6 @@ function IEditor({ wrapperClassName, id, iframeStyles, initValue, initRawValue }
     </>
   );
 }
-
-export const Editor = forwardRef(IEditor);
 
 export { slatePluginsStore as store } from '@udecode/slate-plugins';
 export { editor } from './options';

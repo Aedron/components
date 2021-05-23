@@ -1,6 +1,6 @@
 {
   "name": "@vize/richtext-render",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A richtext render React component using in project vize.",
   "main": "dist/cjs",
   "module": "dist/esm",
@@ -10,9 +10,6 @@
     "publish": "npm publish --access public",
     "build-watch": "../../node_modules/.bin/rollup -c -w",
     "start-example": "cd example && npm start"
-  },
-  "dependencies": {
-    "@webcomponents/custom-elements": "^1.4.3"
   },
   "peerDependencies": {
     "react": "^17.0.2",

@@ -31,7 +31,7 @@ interface Props {
 export function Editor({ wrapperClassName, id, iframeStyles, initValue, initRawValue }: Props) {
   const entry = useRef<HTMLDivElement>(null);
   const [toolbarVisible, setToolbarVisible] = useState(false);
-  const [searchVisible, setSearchVisible] = useState(true);
+  const [searchVisible, setSearchVisible] = useState(false);
   const { setSearch, plugin: searchHighlightPlugin } = useFindReplacePlugin();
 
   const plugins: SlatePlugin<TEditor>[] = useMemo(() => {
@@ -70,6 +70,7 @@ export function Editor({ wrapperClassName, id, iframeStyles, initValue, initRawV
           editor={editor}
           editableProps={editableProps}
           initialValue={initialValue}
+          // renderEditable={(content) => React.createPortal(content, entry)}
         >
           {toolbarVisible &&
             createPortal(

@@ -3,6 +3,7 @@
   "dependencies": {
     "@udecode/slate-plugins": "^1.0.0-alpha.25",
     "@udecode/slate-plugins-test-utils": "1.0.0-alpha.18",
+    "@vize/richtext-render": "^0.1.0",
     "antd": "^4.15.5",
     "i18next": "^19.9.1",
     "i18next-browser-languagedetector": "^6.0.1",

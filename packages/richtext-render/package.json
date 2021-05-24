@@ -1,7 +1,7 @@
 {
-  "name": "@vize/richtext-editor",
-  "version": "0.1.5",
-  "description": "A richtext editor React component using in project vize.",
+  "name": "@vize/richtext-render",
+  "version": "0.1.1",
+  "description": "A richtext render React component using in project vize.",
   "main": "dist/cjs",
   "module": "dist/esm",
   "scripts": {
@@ -11,24 +11,9 @@
     "build-watch": "../../node_modules/.bin/rollup -c -w",
     "start-example": "cd example && npm start"
   },
-  "dependencies": {
-    "@vize/richtext-render": "^0.1.0",
-    "i18next": "^19.9.1",
-    "i18next-browser-languagedetector": "^6.0.1",
-    "i18next-chained-backend": "^2.0.1",
-    "i18next-localstorage-backend": "^3.1.2",
-    "react-i18next": "^11.8.8",
-    "react-icons": "^4.2.0"
-  },
   "peerDependencies": {
-    "@udecode/slate-plugins": "^1.0.0-alpha.25",
-    "antd": "^4.15.6",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "slate": "0.60.11",
-    "slate-history": "0.60.11",
-    "slate-hyperscript": "0.60.11",
-    "slate-react": "0.60.11"
+    "react-dom": "^17.0.2"
   },
   "files": [
     "dist",
